@@ -1,93 +1,94 @@
-# 🛒 Entrega 2 - Backend con Websockets y Handlebars
+Entrega Final Backend Flex 1 - Tristan Lenzberg
+Este proyecto consiste en el desarrollo del backend para una aplicación de e-commerce utilizando Node.js, Express y MongoDB, siguiendo el patrón de arquitectura MVC, con persistencia en MongoDB mediante Mongoose y vistas con Handlebars.
 
-Este proyecto es parte del curso de **Backend en Coderhouse**. El objetivo principal es construir un servidor Express.js que permita gestionar productos en tiempo real utilizando **Websockets (Socket.io)** y renderizar vistas dinámicas con **Handlebars** como motor de plantillas.
+📦 Funcionalidades implementadas
+✅ Productos
+Vista /products con listado paginado de productos.
 
-## 🚀 Tecnologías utilizadas
+Filtro por categoría o disponibilidad usando query params.
 
-- Node.js
-- Express.js
-- Socket.io
-- Express-Handlebars
-- JavaScript
-- HTML y CSS
-- File System (persistencia con archivos .json)
+Ordenamiento ascendente o descendente por precio.
 
----
+API REST completa:
 
-## 📁 Estructura del Proyecto
+GET /api/products con paginación, filtros y ordenamiento.
 
-```
-├── src/
-│   ├── app.js               # Configuración principal del servidor
-│   ├── routes/
-│   │   ├── views.router.js  # Ruta para renderizar vistas
-│   │   └── products.router.js  # Ruta para API de productos
-│   ├── public/              # Archivos estáticos
-│   ├── views/               # Plantillas Handlebars
-│   │   ├── home.handlebars
-│   │   └── realTimeProducts.handlebars
-│   └── utils/
-│       └── ProductManager.js # Clase para manejar los productos desde el archivo .json
-├── products.json            # Archivo de persistencia con productos
-└── package.json
-```
+GET /api/products/:pid
 
----
+POST /api/products
 
-## 📌 Funcionalidades
+PUT /api/products/:pid
 
-### 🌐 Vistas
+DELETE /api/products/:pid
 
-- **Home (`/`)**: Muestra una lista de productos cargados desde `products.json` usando Handlebars.
-- **RealTimeProducts (`/realtimeproducts`)**: Lista de productos en tiempo real que se actualiza automáticamente cuando se agrega o elimina un producto, gracias a **Socket.io**.
+🛒 Carrito
+Vista /carts/:cid que muestra productos del carrito con populate.
 
-### 🧩 Websockets
+API REST funcional:
 
-- Cada vez que se agrega o elimina un producto mediante el formulario en la vista `/realtimeproducts`, se emite un evento por Websocket que actualiza la lista de productos en todos los clientes conectados.
+POST /api/carts crea carrito vacío.
 
-### 🧪 API de Productos (`/api/products`)
+GET /api/carts/:cid devuelve carrito completo con productos.
 
-- `GET /api/products`: Lista todos los productos.
-- `POST /api/products`: Agrega un nuevo producto.
-- `DELETE /api/products/:id`: Elimina un producto por ID.
+POST /api/carts/:cid/product/:pid agrega producto al carrito.
 
----
+PUT /api/carts/:cid actualiza todo el contenido del carrito.
 
-## ⚙️ Instrucciones para Ejecutar
+PUT /api/carts/:cid/products/:pid actualiza la cantidad de un producto.
 
-1. Clona este repositorio:
-   ```bash
-   git clone https://github.com/tristanlgb/Entrega2-Backend1
-   cd Entrega2-Backend1
-   ```
+DELETE /api/carts/:cid/products/:pid elimina un producto específico.
 
-2. Instala las dependencias:
-   ```bash
-   npm install
-   ```
+DELETE /api/carts/:cid vacía el carrito.
 
-3. Ejecuta el servidor:
-   ```bash
-   npm start
-   ```
+🔐 Validaciones y errores
+Captura de errores en todas las rutas con try/catch.
 
-4. Abre el navegador en:
-   ```
-   http://localhost:8080/
-   ```
+Middleware global para manejar errores del servidor.
 
----
+Validación recomendada: campos obligatorios en POST /api/products.
 
-## 📦 Mejoras Futuras
+🗂️ Arquitectura del proyecto
+Patrón MVC: controladores, modelos, rutas y vistas claramente separados.
 
-- Validación de datos en el formulario
-- Implementación de autenticación de usuarios
-- Almacenamiento en base de datos (MongoDB)
+Rutas organizadas por dominio.
 
----
+Persistencia mediante MongoDB Atlas usando Mongoose.
 
-## 👨‍💻 Autor
+Handlebars para renderizar vistas con paginación funcional.
 
-**Tristan Lenzberg**  
-Desarrollador Full Stack  
-[GitHub](https://github.com/tristanlgb)
+⚙️ Tecnologías usadas
+Node.js + Express
+
+MongoDB + Mongoose
+
+Handlebars
+
+dotenv
+
+mongoose-paginate-v2
+
+🚀 Cómo iniciar el proyecto
+Clonar el repositorio.
+
+Crear un archivo .env con las siguientes variables:
+
+ini
+Copiar
+Editar
+PORT=3000
+MONGO_URI=mongodb+srv://<usuario>:<contraseña>@<tu-cluster>.mongodb.net/<nombre-db>
+Instalar las dependencias:
+
+bash
+Copiar
+Editar
+npm install
+Ejecutar el servidor:
+
+bash
+Copiar
+Editar
+npm start
+👨‍💻 Autor
+Tristan Lenzberg
+Proyecto Final - Coderhouse Backend Flex 1
